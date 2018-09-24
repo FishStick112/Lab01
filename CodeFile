@@ -1,0 +1,61 @@
+//Matthew Sundberg
+//COSC 2030-01
+//9-17-2018
+//Lab01
+
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+int main()
+{
+	int count = 0;
+	double start1, start2 = 0, end1 = 0, end2, buf1 = 0, buf2, temp;
+	string filename;
+	ifstream file;
+
+	cout << "Please enter a file name: ";
+	cin >> filename;
+
+	file.open(filename);
+
+	if (file.is_open())
+	{
+		while (file >> temp)
+		{
+			if (!file.fail())
+			{
+				count++;
+				if (count == 1)
+				{
+					start1 = temp;
+				}
+				if (count == 2)
+				{
+					start2 = temp;
+				}
+				buf2 = buf1;
+				buf1 = temp;
+			}
+		}
+		end2 = buf2;
+		end1 = temp;
+	}
+	else
+	{
+		cout << "Could not open file." << endl;
+	}
+
+	cout << "Count: " << count << endl;
+	cout << "First number: " << start1 << endl;
+	cout << "Second number: " << start2 << endl;
+	cout << "Last number: " << end1 << endl;
+	cout << "Second to last number: " << end2 << endl;
+
+	file.close();
+
+	system("pause");
+
+	return 0;
+}
